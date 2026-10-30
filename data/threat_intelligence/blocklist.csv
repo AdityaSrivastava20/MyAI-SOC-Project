@@ -1,0 +1,3 @@
+indicator,type,source,category
+malware.wicar.org,host,wicar.org,test-malware
+testsafebrowsing.appspot.com,host,google-safebrowsing-test,test-malware

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-SOC | URL Threat Detection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>AI-SOC</h1>
+      <p>AI-Powered URL Threat Detection System</p>
+    </div>
+    <div class="status" id="status"><span class="dot"></span><span id="status-text">Connecting…</span></div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Scan a URL</h2>
+      <p class="muted">Paste a link before you click it. The URL is analysed without being opened.</p>
+      <form id="scan-form" class="scan-row">
+        <input id="url-input" type="text" autocomplete="off" spellcheck="false" maxlength="2048"
+               placeholder="Enter URL, e.g. https://google.com" aria-label="URL to scan">
+        <button id="scan-btn" type="submit">Scan URL</button>
+      </form>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section class="card" id="result-card" hidden>
+      <h2>Scan Result</h2>
+      <div class="result">
+        <div class="result-head">
+          <div>
+            <span class="label">URL</span>
+            <div id="r-url" class="url"></div>
+          </div>
+          <span id="r-verdict" class="badge"></span>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-top"><span class="label">Risk Score</span><strong id="r-score"></strong></div>
+            <div class="bar"><div id="r-bar"></div></div>
+          </div>
+          <div class="metric"><span class="label">Severity</span><strong id="r-severity"></strong></div>
+          <div class="metric"><span class="label">Confidence</span><strong id="r-confidence"></strong></div>
+          <div class="metric"><span class="label">Detected by</span><strong id="r-source"></strong></div>
+        </div>
+        <div class="reasons">
+          <span class="label">Why this result</span>
+          <ul id="r-reasons"></ul>
+        </div>
+        <p id="r-note" class="muted small"></p>
+      </div>
+    </section>
+
+    <section class="stats" id="stats">
+      <div class="stat blue"><span>Total Scans</span><strong id="s-total">–</strong></div>
+      <div class="stat green"><span>Safe</span><strong id="s-safe">–</strong></div>
+      <div class="stat amber"><span>Suspicious</span><strong id="s-susp">–</strong></div>
+      <div class="stat red"><span>Malicious</span><strong id="s-mal">–</strong></div>
+    </section>
+    <p class="muted small center" id="s-note"></p>
+
+    <section class="card">
+      <div class="history-head">
+        <div>
+          <h2>Scan History</h2>
+          <p class="muted">Each unique URL appears once; repeat scans increase its counter.</p>
+        </div>
+        <select id="filter" aria-label="Filter by verdict">
+          <option value="">All</option>
+          <option>Safe</option>
+          <option>Suspicious</option>
+          <option>Malicious</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>URL</th><th>Prediction</th><th>Severity</th><th>Risk</th><th>Scans</th><th>Last scanned</th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+      <p id="empty" class="muted center" hidden>No scans yet. Scan your first URL above.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
